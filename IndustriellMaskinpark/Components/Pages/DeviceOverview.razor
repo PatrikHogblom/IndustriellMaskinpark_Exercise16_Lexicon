@@ -13,17 +13,15 @@
         <PropertyColumn Property="@(d => d.Type)" Title="Type" Sortable="true" />
         <PropertyColumn Property="@(d => d.Status)" Title="Status" Sortable="true" />
         <TemplateColumn>
+            @{
+                var device = context; // Assuming 'context' represents the current item
+            }
             <button type="button" class="btn btn-outline-danger">Delete</button>
-        </TemplateColumn>
-        <TemplateColumn>
             <button type="button" class="btn btn-outline-warning">Edit</button>
-        </TemplateColumn>
-        <TemplateColumn>
-            <button type="button" class="btn btn-outline-info">Details</button>
-        </TemplateColumn>
-        <TemplateColumn>
+            <button type="button" class="btn btn-outline-info" @onclick="() => GoToDetailsPage(device.Id)">Details</button>
             <button type="button" class="btn btn-outline-primary">Send Value</button>
-        </TemplateColumn>     
+        </TemplateColumn>
+
     </QuickGrid>
 
     <Paginator State="@pagination" />

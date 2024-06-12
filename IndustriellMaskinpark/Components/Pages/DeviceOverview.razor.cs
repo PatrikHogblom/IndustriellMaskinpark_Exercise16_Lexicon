@@ -14,10 +14,19 @@ namespace IndustriellMaskinpark.Components.Pages
 		[Inject]
         public IDeviceRepository? DeviceRepository { get; set; }
 
-		protected override async Task OnInitializedAsync()
+        [Inject]
+        public NavigationManager NavigationManager { get; set; } // Inject NavigationManager
+
+        protected override async Task OnInitializedAsync()
 		{
 			Devices = (await DeviceRepository.GetAllDevices()).ToList();
 			devicesQueryable = Devices.AsQueryable();
 		}
-	}
+
+        private void GoToDetailsPage(int id)
+        {
+            // Navigate to the details page
+            NavigationManager.NavigateTo($"/devicedetail/{id}");
+        }
+    }
 }

@@ -21,5 +21,10 @@ namespace IndustriellMaskinpark.Repositories
 		{
 			return await _context.Devices.ToListAsync();
 		}
-	}
+
+        public async Task<Device> GetDeviceById(int id)
+        {
+			return await _context.Devices.FirstOrDefaultAsync(d => d.Id == id);
+        }
+    }
 }

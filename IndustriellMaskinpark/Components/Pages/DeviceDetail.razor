@@ -1,0 +1,63 @@
+﻿@page "/devicedetail/{DeviceId:int}"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@rendermode InteractiveServer
+
+<h3>Details for device id @Device.Id</h3>
+<br />
+
+<div>
+
+	<div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Device ID</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Device.Id</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Location</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Device.Location</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Date</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Device.Date</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Type</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Device.Type</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Status</label>
+            <div class="col-sm-8">
+                <label type="text" class="form-control-plaintext">@Device.Status</label>
+            </div>
+        </div>
+
+	</div>
+</div>
+
+<h4>Details for device Sensor Readings</h4>
+
+ @if (queryableCount > 0)
+ {
+
+        <QuickGrid Items="@valuesQueryable" Pagination="@pagination">
+        <PropertyColumn Property="@(p => p.Id)" IsDefaultSortColumn="true" Title="ID" Sortable="true">
+            </PropertyColumn>
+            <PropertyColumn Property="@(e => e.Value)" Title="Sensor Value" Sortable="true" />
+            <PropertyColumn Property="@(e => e.TimeStamp)" Title="Timestamp" Sortable="true" />
+            <PropertyColumn Property="@(e => e.DeviceId)" Title="Device" Sortable="true" />
+        </QuickGrid>
+
+        <Paginator State="@pagination" />
+ }
+ else
+ {
+        <p>No time registrations found.</p>
+ }

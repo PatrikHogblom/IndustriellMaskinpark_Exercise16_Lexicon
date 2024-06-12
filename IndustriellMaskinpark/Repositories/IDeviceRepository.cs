@@ -5,5 +5,6 @@ namespace IndustriellMaskinpark.Repositories
 	public interface IDeviceRepository
 	{
 		Task<IEnumerable<Device>> GetAllDevices();
+		Task<Device> GetDeviceById(int id);
 	}
 }

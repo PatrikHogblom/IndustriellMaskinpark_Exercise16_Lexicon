@@ -13,6 +13,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddDbContextFactory<MaskinparkDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
+builder.Services.AddScoped<IDeviceReadingsRepository, DeviceReadingsRepository>();
 
 var app = builder.Build();
 await app.SeedDataAsync();
