@@ -11,5 +11,6 @@ namespace IndustriellMaskinpark.Data
         }
 
         public DbSet<Device> Devices { get; set; }
+        public DbSet<DeviceSensorReading> DeviceSensorReadings { get; set; }
     }
 }

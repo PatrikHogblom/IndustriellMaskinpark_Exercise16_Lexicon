@@ -36,10 +36,24 @@ namespace IndustriellMaskinpark.Data
                 .RuleFor(d => d.Location, f => f.Address.Country())
                 .RuleFor(d => d.Date, f => f.Date.Past())
                 .RuleFor(d => d.Type, f => f.PickRandom(sensorTypes))
-                .RuleFor(d => d.Status, f => f.Random.Bool());
+                .RuleFor(d => d.Status, f => f.Random.Bool())
+                .FinishWith((f,d) =>
+                {
+                    //generate a randon number of sensor readings for each device
+                    d.SensorReadings = GenerateSensorValues(f.Random.Int(5, 15));
+                });
 
             var devices = deviceFaker.Generate(numberOfDevices);
             return devices;
+        }
+
+        private static List<DeviceSensorReading> GenerateSensorValues(int numSensorValues)
+        {
+            var sensorReadingFaker = new Faker<DeviceSensorReading>()
+            .RuleFor(sr => sr.TimeStamp, f => f.Date.Recent())
+            .RuleFor(sr => sr.Value, f => f.Random.Double(-100, 100));
+
+            return sensorReadingFaker.Generate(numSensorValues);
         }
     }
 }
