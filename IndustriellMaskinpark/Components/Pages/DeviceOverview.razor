@@ -1,0 +1,38 @@
+﻿@page "/deviceoverview"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@rendermode InteractiveServer
+
+<h3>DeviceOverview</h3>
+
+@if (devicesQueryable != null)
+{
+    <QuickGrid Items="@devicesQueryable" Pagination="@pagination">
+        <PropertyColumn Property="@(d => d.Id)" IsDefaultSortColumn="true" Title="ID" Sortable="true" />
+        <PropertyColumn Property="@(d => d.Location)" Title="Location" Sortable="true" />
+        <PropertyColumn Property="@(d => d.Date)" Title="Date" Sortable="true" />
+        <PropertyColumn Property="@(d => d.Type)" Title="Type" Sortable="true" />
+        <PropertyColumn Property="@(d => d.Status)" Title="Status" Sortable="true" />
+        <TemplateColumn>
+            <button type="button" class="btn btn-outline-danger">Delete</button>
+        </TemplateColumn>
+        <TemplateColumn>
+            <button type="button" class="btn btn-outline-warning">Edit</button>
+        </TemplateColumn>
+        <TemplateColumn>
+            <button type="button" class="btn btn-outline-info">Details</button>
+        </TemplateColumn>
+        <TemplateColumn>
+            <button type="button" class="btn btn-outline-primary">Send Value</button>
+        </TemplateColumn>     
+    </QuickGrid>
+
+    <Paginator State="@pagination" />
+}
+else
+{
+    <p>Loading devices...</p>
+}
+
+
+
+

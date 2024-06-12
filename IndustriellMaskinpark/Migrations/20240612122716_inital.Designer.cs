@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IndustriellMaskinpark.Migrations
 {
     [DbContext(typeof(MaskinparkDbContext))]
-    [Migration("20240612094612_AddedSensorReadingsEntityList")]
-    partial class AddedSensorReadingsEntityList
+    [Migration("20240612122716_inital")]
+    partial class inital
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

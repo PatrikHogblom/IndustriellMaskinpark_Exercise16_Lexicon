@@ -1,6 +1,7 @@
 using IndustriellMaskinpark.Components;
 using IndustriellMaskinpark.Data;
 using IndustriellMaskinpark.Extensions;
+using IndustriellMaskinpark.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddDbContextFactory<MaskinparkDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IDeviceRepository, DeviceRepository>();
 
 var app = builder.Build();
 await app.SeedDataAsync();
