@@ -12,7 +12,14 @@ namespace IndustriellMaskinpark.Repositories
 			_context = dbContextFactory.CreateDbContext();            
         }
 
-		public void Dispose()
+        public async Task<Device> AddDevice(Device device)
+        {
+            var addedEntity = await _context.Devices.AddAsync(device);
+            await _context.SaveChangesAsync();
+            return addedEntity.Entity;
+        }
+
+        public void Dispose()
 		{
 			_context.Dispose();
 		}
@@ -26,5 +33,7 @@ namespace IndustriellMaskinpark.Repositories
         {
 			return await _context.Devices.FirstOrDefaultAsync(d => d.Id == id);
         }
+
+
     }
 }

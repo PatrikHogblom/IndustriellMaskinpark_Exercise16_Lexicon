@@ -6,5 +6,6 @@ namespace IndustriellMaskinpark.Repositories
 	{
 		Task<IEnumerable<Device>> GetAllDevices();
 		Task<Device> GetDeviceById(int id);
+		Task<Device> AddDevice(Device device);
 	}
 }

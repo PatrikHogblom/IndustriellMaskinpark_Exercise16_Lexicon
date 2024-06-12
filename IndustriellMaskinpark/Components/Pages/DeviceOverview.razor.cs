@@ -28,5 +28,10 @@ namespace IndustriellMaskinpark.Components.Pages
             // Navigate to the details page
             NavigationManager.NavigateTo($"/devicedetail/{id}");
         }
+
+        private void GoToAddDevicePage()
+        {
+            NavigationManager.NavigateTo($"/deviceadd");
+        }
     }
 }

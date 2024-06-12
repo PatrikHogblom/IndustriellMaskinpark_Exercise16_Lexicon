@@ -4,6 +4,8 @@
 
 <h3>DeviceOverview</h3>
 
+<button type="button" class="btn btn-outline-success" @onclick="() => GoToAddDevicePage()">Add Device</button>
+
 @if (devicesQueryable != null)
 {
     <QuickGrid Items="@devicesQueryable" Pagination="@pagination">
