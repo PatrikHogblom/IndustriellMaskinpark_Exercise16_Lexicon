@@ -1,4 +1,7 @@
 using IndustriellMaskinpark.Components;
+using IndustriellMaskinpark.Data;
+using IndustriellMaskinpark.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddDbContextFactory<MaskinparkDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 var app = builder.Build();
+await app.SeedDataAsync();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
