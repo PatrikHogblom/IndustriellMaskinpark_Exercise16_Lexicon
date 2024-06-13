@@ -1,0 +1,29 @@
+﻿@page "/devicesensoredit/{DeviceId:int}"
+@rendermode InteractiveServer
+
+<h3>EditDeviceValues</h3>
+
+@if (!IsSaved)
+{
+    <EditForm Model="@DeviceSensorReading" OnValidSubmit="HandleValidSubmit" OnInvalidSubmit="HandleÏnvalidSubmit">
+        <div class="row mb-3">
+            <label for="value" class="col-form-label col-md-3">Value: </label>
+            <div class="col-md-8">
+                <InputNumber id="value" class="form-control" @bind-Value="DeviceSensorReading.Value" placeholder="Enter Value" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="timestamp" class="col-form-label col-md-3">Timestamp: </label>
+            <div class="col-md-8">
+                <InputDate id="timestamp" class="form-control" @bind-Value="DeviceSensorReading.TimeStamp" placeholder="Enter Timestamp" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary me-1">Save Changes</button>
+        <button type="button" class="btn btn-outline-primary ms-1" @onclick="() => NavigateBackToSensorOverview(DeviceSensorReading.DeviceId)">Back to overview</button>
+    </EditForm>
+}
+else
+{
+    <div class="alert @StatusClass">@Message</div>
+    <button type="button" class="btn btn-outline-primary" @onclick="() => NavigateBackToSensorOverview(DeviceSensorReading.DeviceId)">Back to overview</button>
+}

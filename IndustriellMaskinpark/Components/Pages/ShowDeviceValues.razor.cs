@@ -22,6 +22,10 @@ namespace IndustriellMaskinpark.Components.Pages
         public PaginationState pagination = new() { ItemsPerPage = 10 };
         protected int queryableCount = 0;
 
+        protected bool IsDeleted = false;
+        protected string Message = string.Empty;
+        protected string StatusClass = string.Empty;
+
         protected override async Task OnInitializedAsync()
         {
             //Device = await DeviceRepository.GetDeviceById(DeviceId);
@@ -32,6 +36,26 @@ namespace IndustriellMaskinpark.Components.Pages
         private void AddSensorValueDevicePage(int id)
         {
             NavigationManager.NavigateTo($"/deviceaddvalue/{id}");
+        }
+
+        private void GoToSensorValueEditPage(int id)
+        {
+            NavigationManager.NavigateTo($"/devicesensoredit/{id}");
+        }
+
+        protected async Task DeleteValue(int id)
+        {
+            await DeviceReadingsRepository.DeleteSensorValue(id);
+            StatusClass = "alert-success";
+            Message = "Deleted successfully";
+            IsDeleted = true;
+            await LoadDevices(); // Refresh the devices list*/
+        }
+
+        private async Task LoadDevices()
+        {
+            SensorReadings = (await DeviceReadingsRepository.GetDeviceSensorReadings(DeviceId)).ToList();
+            valuesQueryable = SensorReadings.AsQueryable();
         }
     }
 }

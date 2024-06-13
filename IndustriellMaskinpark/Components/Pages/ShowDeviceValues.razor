@@ -7,6 +7,11 @@
 
 <button type="button" class="btn btn-outline-success" @onclick="() => AddSensorValueDevicePage(DeviceId)">Add Sensor value</button>
  
+@if (IsDeleted)
+{
+    <div class="alert alert-success">@Message</div>
+}
+
 @if (queryableCount > 0)
  {
         <QuickGrid Items="@valuesQueryable" Pagination="@pagination">
@@ -15,6 +20,13 @@
             <PropertyColumn Property="@(e => e.Value)" Title="Sensor Value" Sortable="true" />
             <PropertyColumn Property="@(e => e.TimeStamp)" Title="Timestamp" Sortable="true" />
             <PropertyColumn Property="@(e => e.DeviceId)" Title="Device" Sortable="true" />
+            <TemplateColumn>
+                @{
+                    var deviceSensorValue = context; // Assuming 'context' represents the current item
+                }
+                <button type="button" class="btn btn-outline-danger" @onclick="() => DeleteValue(deviceSensorValue.Id)">Delete</button>
+            <button type="button" class="btn btn-outline-warning" @onclick="() => GoToSensorValueEditPage(deviceSensorValue.Id)">Edit</button>
+            </TemplateColumn>
         </QuickGrid>
 
         <Paginator State="@pagination" />
