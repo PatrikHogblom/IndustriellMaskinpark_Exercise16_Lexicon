@@ -1,5 +1,38 @@
-﻿<h3>DeviceEdit</h3>
+﻿@page "/deviceedit/{DeviceId:int}"
+@rendermode InteractiveServer
 
-@code {
+<h3>DeviceEdit</h3>
 
+@if(!IsSaved)
+{
+	<EditForm Enhance Model="Device" FormName="EditDeviceForm" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleÏnvalidSubmit" method = "post">
+        <div class="row mb-3">
+            <label for="location" class="col-form-label col-md-3">Location: </label>
+            <div class="col-md-8">
+                <InputText id="location" class="form-control col-md-8" @bind-Value="@Device.Location" placeholder="Enter Location"></InputText>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="type" class="col-form-label col-md-3">Type: </label>
+            <div class="col-md-8">
+                <InputText id="type" class="form-control col-md-8" @bind-Value="@Device.Type" placeholder="Enter sensor type"></InputText>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="status" class="col-form-label col-md-3">Status: </label>
+            <div>
+                <InputCheckbox id="status" @bind-Value="@Device.Status">Enter the status of sensor</InputCheckbox>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary me-1">Save Device Changes</button>
+        <button type="button" class="btn btn-outline-primary ms-1" @onclick="@NavigateToOverview">Back to overview</button>
+
+
+    </EditForm>
+}
+else
+{
+    <div class="alert @StatusClass">@Message</div>
+    <button type="button" class="btn btn-outline-primary" @onclick="@NavigateToOverview">Back to overview</button>
 }

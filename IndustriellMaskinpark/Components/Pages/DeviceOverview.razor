@@ -19,7 +19,7 @@
                 var device = context; // Assuming 'context' represents the current item
             }
             <button type="button" class="btn btn-outline-danger">Delete</button>
-            <button type="button" class="btn btn-outline-warning">Edit</button>
+            <button type="button" class="btn btn-outline-warning" @onclick="() => GoToEditPage(device.Id)">Edit</button>
             <button type="button" class="btn btn-outline-info" @onclick="() => GoToDetailsPage(device.Id)">Details</button>
             <button type="button" class="btn btn-outline-primary">Send Value</button>
         </TemplateColumn>

@@ -33,5 +33,9 @@ namespace IndustriellMaskinpark.Components.Pages
         {
             NavigationManager.NavigateTo($"/deviceadd");
         }
+        private void GoToEditPage(int id)
+        {
+            NavigationManager.NavigateTo($"/deviceedit/{id}");
+        }
     }
 }

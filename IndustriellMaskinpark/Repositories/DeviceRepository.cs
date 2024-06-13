@@ -34,6 +34,24 @@ namespace IndustriellMaskinpark.Repositories
 			return await _context.Devices.FirstOrDefaultAsync(d => d.Id == id);
         }
 
+        public async Task<Device> UpdateDevice(Device device)
+        {
+            var foundDevice = await _context.Devices.FirstOrDefaultAsync(d => d.Id == device.Id);
 
+            if (foundDevice != null)
+            {
+                foundDevice.Id = device.Id;
+                foundDevice.Location = device.Location;
+                foundDevice.Date = device.Date;
+                foundDevice.Type = device.Type;
+                foundDevice.Status = device.Status;
+
+                await _context.SaveChangesAsync();
+
+                return foundDevice;
+            }
+
+            return null;
+        }
     }
 }
