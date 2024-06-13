@@ -1,0 +1,25 @@
+﻿@page "/devicesensorvalues/{DeviceId:int}"
+@using Microsoft.AspNetCore.Components.QuickGrid
+@rendermode InteractiveServer
+
+<h3>ShowDeviceValues</h3>
+<h4>Details for device Sensor Readings</h4>
+
+<button type="button" class="btn btn-outline-success" @onclick="() => AddSensorValueDevicePage(DeviceId)">Add Sensor value</button>
+ 
+@if (queryableCount > 0)
+ {
+        <QuickGrid Items="@valuesQueryable" Pagination="@pagination">
+        <PropertyColumn Property="@(p => p.Id)" IsDefaultSortColumn="true" Title="ID" Sortable="true">
+            </PropertyColumn>
+            <PropertyColumn Property="@(e => e.Value)" Title="Sensor Value" Sortable="true" />
+            <PropertyColumn Property="@(e => e.TimeStamp)" Title="Timestamp" Sortable="true" />
+            <PropertyColumn Property="@(e => e.DeviceId)" Title="Device" Sortable="true" />
+        </QuickGrid>
+
+        <Paginator State="@pagination" />
+ }
+ else
+ {
+    <p>No sensor readings found.</p>
+ }

@@ -56,9 +56,9 @@ namespace IndustriellMaskinpark.Components.Pages
             devicesQueryable = Devices.AsQueryable();
         }
 
-        private void GoToAddSensorValuePage(int id)
+        private void GoToSensorValuePage(int id)
         {
-            NavigationManager.NavigateTo($"/deviceaddvalue/{id}");
+            NavigationManager.NavigateTo($"/devicesensorvalues/{id}");
         }
 }
 }

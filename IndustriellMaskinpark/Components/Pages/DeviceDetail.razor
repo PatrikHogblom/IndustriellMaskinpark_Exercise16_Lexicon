@@ -42,7 +42,9 @@
 	</div>
 </div>
 
-<h4>Details for device Sensor Readings</h4>
+<ShowDeviceValues DeviceId="@DeviceId" />
+
+@* <h4>Details for device Sensor Readings</h4>
 
  @if (queryableCount > 0)
  {
@@ -60,4 +62,4 @@
  else
  {
         <p>No time registrations found.</p>
- }
+ } *@
