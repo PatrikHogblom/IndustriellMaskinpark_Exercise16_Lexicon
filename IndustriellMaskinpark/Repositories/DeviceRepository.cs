@@ -19,6 +19,18 @@ namespace IndustriellMaskinpark.Repositories
             return addedEntity.Entity;
         }
 
+        public async Task DeleteDevice(int id)
+        {
+            var foundDevice = await _context.Devices.FirstOrDefaultAsync(d => d.Id == id);
+            if (foundDevice == null)
+            {
+                return;
+            }
+
+            _context.Devices.Remove(foundDevice);
+            await _context.SaveChangesAsync();
+        }
+
         public void Dispose()
 		{
 			_context.Dispose();

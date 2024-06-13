@@ -8,5 +8,6 @@ namespace IndustriellMaskinpark.Repositories
 		Task<Device> GetDeviceById(int id);
 		Task<Device> AddDevice(Device device);
 		Task<Device> UpdateDevice(Device device);
+		Task DeleteDevice(int id);
 	}
 }
