@@ -1,0 +1,18 @@
+﻿@page "/deviceaddvalue/{DeviceId:int}"
+@rendermode InteractiveServer
+
+<h3>SendValueToDevice</h3>
+<br/>
+
+<div>
+	<h4>Add sensor value</h4>
+
+	<EditForm Model="@newReading" OnValidSubmit="AddSensorValueReading">
+		<div class="form-group">
+			<label for="Value">Value</label>
+			<InputNumber @bind-Value="newReading.Value" class="form-control" />
+			<button type="submit" class="btn btn-primary">Add Reading</button>
+		</div>
+	</EditForm>
+
+</div>

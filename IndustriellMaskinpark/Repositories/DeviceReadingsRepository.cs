@@ -17,5 +17,11 @@ namespace IndustriellMaskinpark.Repositories
         {
             return await _context.DeviceSensorReadings.Where(d => d.DeviceId == deviceId).OrderBy(t => t.TimeStamp).ToListAsync();
         }
+
+        public async Task AddDeviceValue(DeviceSensorReading deviceSensorReading)
+        {
+            _context.DeviceSensorReadings.Add(deviceSensorReading);
+            await _context.SaveChangesAsync();
+        }
     }
 }

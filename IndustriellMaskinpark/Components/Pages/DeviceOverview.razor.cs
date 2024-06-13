@@ -8,10 +8,10 @@ namespace IndustriellMaskinpark.Components.Pages
     public partial class DeviceOverview
     {
         public List<Device> Devices { get; set; }
-		IQueryable<Device> devicesQueryable { get; set; }
-		PaginationState pagination = new PaginationState { ItemsPerPage = 20 }; // Set the page size
+        IQueryable<Device> devicesQueryable { get; set; }
+        PaginationState pagination = new PaginationState { ItemsPerPage = 20 }; // Set the page size
 
-		[Inject]
+        [Inject]
         public IDeviceRepository? DeviceRepository { get; set; }
 
         [Inject]
@@ -22,10 +22,10 @@ namespace IndustriellMaskinpark.Components.Pages
         protected string StatusClass = string.Empty;
 
         protected override async Task OnInitializedAsync()
-		{
-			Devices = (await DeviceRepository.GetAllDevices()).ToList();
-			devicesQueryable = Devices.AsQueryable();
-		}
+        {
+            Devices = (await DeviceRepository.GetAllDevices()).ToList();
+            devicesQueryable = Devices.AsQueryable();
+        }
 
         private void GoToDetailsPage(int id)
         {
@@ -55,5 +55,10 @@ namespace IndustriellMaskinpark.Components.Pages
             Devices = (await DeviceRepository.GetAllDevices()).ToList();
             devicesQueryable = Devices.AsQueryable();
         }
-    }
+
+        private void GoToAddSensorValuePage(int id)
+        {
+            NavigationManager.NavigateTo($"/deviceaddvalue/{id}");
+        }
+}
 }
