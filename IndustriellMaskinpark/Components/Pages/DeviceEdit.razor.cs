@@ -30,6 +30,7 @@ namespace IndustriellMaskinpark.Components.Pages
 
         protected async Task HandleValidSubmit()
         {
+            Device.Date = DateTime.Now;//this is to 
             await DeviceRepository.UpdateDevice(Device);
             IsSaved = true;
             StatusClass = "alert-success";

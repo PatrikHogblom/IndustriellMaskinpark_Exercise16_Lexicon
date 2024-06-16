@@ -2,38 +2,38 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 @rendermode InteractiveServer
 
-<h3>DeviceOverview</h3>
+<h3 class="display-5 align-content-center">DeviceOverview</h3>
 
-<button type="button" class="btn btn-outline-success" @onclick="() => GoToAddDevicePage()">Add Device</button>
+<button type="button" class="btn btn-outline-success container-fluid p-3 m-2" @onclick="() => GoToAddDevicePage()">Add Device</button>
 
 @if (devicesQueryable != null)
 {
-    @if(IsDeleted == true)
-    {
-        <div class="alert @StatusClass">@Message</div>
-    }
-    <QuickGrid Items="@devicesQueryable" Pagination="@pagination">
-        <PropertyColumn Property="@(d => d.Id)" IsDefaultSortColumn="true" Title="ID" Sortable="true" />
-        <PropertyColumn Property="@(d => d.DeviceName)" Title="Name" Sortable="true" />
-        <PropertyColumn Property="@(d => d.Location)" Title="Location" Sortable="true" />
-        <PropertyColumn Property="@(d => d.Date)" Title="Date" Sortable="true" />
-        <PropertyColumn Property="@(d => d.Type)" Title="Type" Sortable="true" />
-       @*  <PropertyColumn Property="@(d => d.Status)" Title="Status" Sortable="true" /> *@
-        <TemplateColumn>
-            <button type="button" class="@ButtonClass(context.Status)" @onclick="() => ToggleStatus(context)">@(context.Status ? "Online" : "Offline")</button>
-        </TemplateColumn>
-        <TemplateColumn>
-            <button type="button" class="btn btn-outline-danger" @onclick="() => DeleteDevice(context.Id)">Delete</button>
-            <button type="button" class="btn btn-outline-warning" @onclick="() => GoToEditPage(context.Id)">Edit</button>
-            <button type="button" class="btn btn-outline-info" @onclick="() => GoToDetailsPage(context.Id)">Details</button>
-            <button type="button" class="btn btn-outline-primary" @onclick="() => GoToSensorValuePage(context.Id)">Sensor Values</button>
-        </TemplateColumn>
+        @if (IsDeleted == true)
+        {
+            <div class="alert @StatusClass">@Message</div>
+        }
+            <QuickGrid Items="@devicesQueryable" Pagination="@pagination">
+            <PropertyColumn Property="@(d => d.Id)" IsDefaultSortColumn="true" Title="ID" Sortable="true" Align="Align.Center" />
+            <PropertyColumn Property="@(d => d.DeviceName)" Title="Name" Sortable="true" Align="Align.Center" />
+            <PropertyColumn Property="@(d => d.Location)" Title="Location" Sortable="true" Align="Align.Center" />
+            <PropertyColumn Property="@(d => d.Date)" Title="Date Added/Edited" Sortable="true" Align="Align.Center" />
+            <PropertyColumn Property="@(d => d.Type)" Title="Type" Sortable="true" Align="Align.Center" />
+            @*  <PropertyColumn Property="@(d => d.Status)" Title="Status" Sortable="true" /> *@
+            <TemplateColumn Title="Status" Align="Align.Center">
+                <button type="button" class="@ButtonClass(context.Status)" @onclick="() => ToggleStatus(context)">@(context.Status ? "Online" : "Offline")</button>
+            </TemplateColumn>
+            <TemplateColumn Title="Actions" Align="Align.Center">
+                <button type="button" class="btn btn-outline-danger" @onclick="() => DeleteDevice(context.Id)">Delete</button>
+                <button type="button" class="btn btn-outline-warning" @onclick="() => GoToEditPage(context.Id)">Edit</button>
+                <button type="button" class="btn btn-outline-info" @onclick="() => GoToDetailsPage(context.Id)">Details</button>
+                <button type="button" class="btn btn-outline-primary" @onclick="() => GoToSensorValuePage(context.Id)">Sensor Values</button>
+            </TemplateColumn>
 
-    </QuickGrid>
+        </QuickGrid>
 
-    <Paginator State="@pagination" />
-
-    <OverviewStatictics></OverviewStatictics>
+        <Paginator State="@pagination" />
+    
+        <OverviewStatictics></OverviewStatictics>
 
 }
 else
