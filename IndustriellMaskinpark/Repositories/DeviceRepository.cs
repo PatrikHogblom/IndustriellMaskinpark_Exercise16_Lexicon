@@ -65,5 +65,22 @@ namespace IndustriellMaskinpark.Repositories
 
             return null;
         }
-    }
+
+		public async Task<int> GetTotalDevicesCount()
+		{
+			return await _context.Devices.CountAsync();
+		}
+
+		public async Task<int> GetTotalOnlineDevicesCount()
+		{
+			return await _context.Devices.Where(d => d.Status == true).CountAsync();
+		}
+
+		public async Task<int> GetDevicesAddedTodayCount()
+		{
+			DateTime today = DateTime.Today;
+			return await _context.Devices.Where(d => d.Date.Date == today).CountAsync();
+		}
+
+	}
 }

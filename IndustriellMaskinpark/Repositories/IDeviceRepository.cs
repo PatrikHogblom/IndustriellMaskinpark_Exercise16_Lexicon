@@ -9,5 +9,9 @@ namespace IndustriellMaskinpark.Repositories
 		Task<Device> AddDevice(Device device);
 		Task<Device> UpdateDevice(Device device);
 		Task DeleteDevice(int id);
+		Task<int> GetTotalDevicesCount();
+		Task<int> GetTotalOnlineDevicesCount();
+		Task<int> GetDevicesAddedTodayCount();
+
 	}
 }
