@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IndustriellMaskinpark.Migrations
 {
     [DbContext(typeof(MaskinparkDbContext))]
-    [Migration("20240612122716_inital")]
-    partial class inital
+    [Migration("20240616154724_initialAddedMachineName")]
+    partial class initialAddedMachineName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,10 @@ namespace IndustriellMaskinpark.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DeviceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
                         .IsRequired()

@@ -60,5 +60,14 @@ namespace IndustriellMaskinpark.Components.Pages
         {
             NavigationManager.NavigateTo($"/devicesensorvalues/{id}");
         }
-}
+
+        string ButtonClass(bool status) => status ? "btn btn-success" : "btn btn-danger";
+
+        async Task ToggleStatus(Device device)
+        {
+            device.Status = !device.Status; // Toggle the status
+            await DeviceRepository.UpdateDevice(device); // Assuming UpdateDevice method updates the device status in repository
+            await LoadDevices(); // Refresh devices list
+        }
+    }
 }

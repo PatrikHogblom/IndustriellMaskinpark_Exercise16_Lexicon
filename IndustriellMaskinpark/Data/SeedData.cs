@@ -33,6 +33,7 @@ namespace IndustriellMaskinpark.Data
             var sensorTypes = new[] { "Temperature", "Humidity", "Pressure", "Light", "Motion" };
 
             var deviceFaker = new Faker<Device>()
+                .RuleFor(d => d.DeviceName, f => $"{f.PickRandom(sensorTypes)}_{f.System.Random.Hexadecimal(8)}")
                 .RuleFor(d => d.Location, f => f.Address.Country())
                 .RuleFor(d => d.Date, f => f.Date.Past())
                 .RuleFor(d => d.Type, f => f.PickRandom(sensorTypes))

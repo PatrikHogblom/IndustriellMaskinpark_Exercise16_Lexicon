@@ -14,18 +14,19 @@
     }
     <QuickGrid Items="@devicesQueryable" Pagination="@pagination">
         <PropertyColumn Property="@(d => d.Id)" IsDefaultSortColumn="true" Title="ID" Sortable="true" />
+        <PropertyColumn Property="@(d => d.DeviceName)" Title="Name" Sortable="true" />
         <PropertyColumn Property="@(d => d.Location)" Title="Location" Sortable="true" />
         <PropertyColumn Property="@(d => d.Date)" Title="Date" Sortable="true" />
         <PropertyColumn Property="@(d => d.Type)" Title="Type" Sortable="true" />
-        <PropertyColumn Property="@(d => d.Status)" Title="Status" Sortable="true" />
+       @*  <PropertyColumn Property="@(d => d.Status)" Title="Status" Sortable="true" /> *@
         <TemplateColumn>
-            @{
-                var device = context; // Assuming 'context' represents the current item
-            }
-            <button type="button" class="btn btn-outline-danger" @onclick="() => DeleteDevice(device.Id)">Delete</button>
-            <button type="button" class="btn btn-outline-warning" @onclick="() => GoToEditPage(device.Id)">Edit</button>
-            <button type="button" class="btn btn-outline-info" @onclick="() => GoToDetailsPage(device.Id)">Details</button>
-            <button type="button" class="btn btn-outline-primary" @onclick="() => GoToSensorValuePage(device.Id)">Sensor Values</button>
+            <button type="button" class="@ButtonClass(context.Status)" @onclick="() => ToggleStatus(context)">@(context.Status ? "Online" : "Offline")</button>
+        </TemplateColumn>
+        <TemplateColumn>
+            <button type="button" class="btn btn-outline-danger" @onclick="() => DeleteDevice(context.Id)">Delete</button>
+            <button type="button" class="btn btn-outline-warning" @onclick="() => GoToEditPage(context.Id)">Edit</button>
+            <button type="button" class="btn btn-outline-info" @onclick="() => GoToDetailsPage(context.Id)">Details</button>
+            <button type="button" class="btn btn-outline-primary" @onclick="() => GoToSensorValuePage(context.Id)">Sensor Values</button>
         </TemplateColumn>
 
     </QuickGrid>
