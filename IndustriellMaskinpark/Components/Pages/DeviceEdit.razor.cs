@@ -45,7 +45,5 @@ namespace IndustriellMaskinpark.Components.Pages
         {
             NavigationManager.NavigateTo("/deviceoverview");
         }
-
-
     }
 }

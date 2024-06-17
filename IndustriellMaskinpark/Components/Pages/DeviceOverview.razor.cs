@@ -7,6 +7,7 @@ namespace IndustriellMaskinpark.Components.Pages
 {
     public partial class DeviceOverview
     {
+        private OverviewStatictics OverviewStatictics { get; set; }
         public List<Device> Devices { get; set; }
         IQueryable<Device> devicesQueryable { get; set; }
         PaginationState pagination = new PaginationState { ItemsPerPage = 20 }; // Set the page size
@@ -48,6 +49,7 @@ namespace IndustriellMaskinpark.Components.Pages
             Message = "Deleted successfully";
             IsDeleted = true;
             await LoadDevices(); // Refresh the devices list
+            await OverviewStatictics.Refresh(); // Refresh the statistics
         }
 
         private async Task LoadDevices()
@@ -68,6 +70,8 @@ namespace IndustriellMaskinpark.Components.Pages
             device.Status = !device.Status; // Toggle the status
             await DeviceRepository.UpdateDevice(device); // Assuming UpdateDevice method updates the device status in repository
             await LoadDevices(); // Refresh devices list
+            await OverviewStatictics.Refresh(); // Refresh the statistics
         }
+
     }
 }

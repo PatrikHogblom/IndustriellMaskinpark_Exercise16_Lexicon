@@ -14,11 +14,22 @@ namespace IndustriellMaskinpark.Components.Pages
 		int TotalDevicesEditedAndAddedToday { get; set; }
 
 
-		protected override async Task OnInitializedAsync()
-		{
-			TotalDevicesCount = await DeviceRepository.GetTotalDevicesCount();
-			TotalDevicesOnline = await DeviceRepository.GetTotalOnlineDevicesCount();
-			TotalDevicesEditedAndAddedToday = await DeviceRepository.GetDevicesAddedTodayCount();
-		}
-	}
+        protected override async Task OnInitializedAsync()
+        {
+            await LoadStatistics();
+        }
+
+        public async Task LoadStatistics()
+        {
+            TotalDevicesCount = await DeviceRepository.GetTotalDevicesCount();
+            TotalDevicesOnline = await DeviceRepository.GetTotalOnlineDevicesCount();
+            TotalDevicesEditedAndAddedToday = await DeviceRepository.GetDevicesAddedTodayCount();
+        }
+
+        public async Task Refresh()
+        {
+            await LoadStatistics();
+            await InvokeAsync(StateHasChanged);
+        }
+    }
 }
